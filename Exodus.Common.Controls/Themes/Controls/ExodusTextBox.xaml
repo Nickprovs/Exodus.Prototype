@@ -1,0 +1,125 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Exodus.Common.Controls.Themes.Controls"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:controls="clr-namespace:Exodus.Common.Controls.Controls">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Exodus.Common.Controls;component/Themes/Theme.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type controls:ExodusTextBox}">
+        <Setter Property="Foreground" Value="{DynamicResource F1Brush}"></Setter>
+        <Setter Property="CaretBrush" Value="{DynamicResource F1Brush}"></Setter>
+        <Setter Property="Background" Value="{DynamicResource B3Brush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource F1Brush}"/>
+        <Setter Property="MinHeight" Value="28"/>
+        <!--Default value for text... For multiline textboxes... set contentalignment to top in implementation-->
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <!--Default value for borderthickness... can be overwritten (useful for textboxes without borders)-->
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ExodusTextBox}">
+                    <!--The outer border, which is always set-->
+                    <Border Name="Border" CornerRadius="5" Padding="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}">
+                        <!--The inner border is only set when the text box is disabled to meet designer's requirements-->
+                        <Border Name="InnerBorder" Background="Transparent" BorderBrush="Transparent">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"  Width="{Binding Width, ElementName=Border}" Grid.ColumnSpan="9" x:Name="PART_ContentHost" VerticalAlignment="{TemplateBinding VerticalAlignment}"   Focusable="True"/>
+                                <!--The watermark, which only appears when the text box is blank through extra styles-->
+                                <TextBlock x:Name="InternalWatermarkLabel" 
+                                           Grid.Column="0"
+                                           Text="{Binding Path=(controls:ExodusTextBox.Watermark), RelativeSource={RelativeSource TemplatedParent}}" 
+                                           Visibility="Collapsed" Focusable="False"
+                                           VerticalAlignment="Center" Margin=" 5 1 0 0"
+                                           Foreground="{DynamicResource C1Brush}"
+                                           Background="Transparent"
+                                           Grid.ColumnSpan="9"
+                                           FontSize="{TemplateBinding FontSize}"                                          
+                                           />
+                            </Grid>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--This is currently the only extra style which effects disabled text boxes. I forsee more conditions.-->
+                        <!--Extra styles for when IsEnabled = False... Gives weight and color to the inner border and sets specific colors.-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="InnerBorder" Property="CornerRadius" Value="5"></Setter>
+                                <Setter TargetName="InnerBorder" Property="BorderThickness" Value="2"></Setter>
+                                <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{DynamicResource B6Brush}"></Setter>
+                                <Setter TargetName="InnerBorder" Property="Background" Value="{DynamicResource F2Brush}"></Setter>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource F2Brush}"></Setter>
+                                <Setter TargetName="Border" Property="Padding" Value="0"></Setter>
+                                <Setter TargetName="InternalWatermarkLabel" Property="Visibility" Value="Visible"></Setter>
+                                <Setter TargetName="InternalWatermarkLabel" Property="Foreground" Value="{DynamicResource F7Brush}"></Setter>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        <!--Extra styles for a non-error, non-success, non-focused (inside of), empty text-box... Needs to display the inner watermark with a specific brush.-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="False" />
+                                <Condition Property="Text" Value="{x:Static sys:String.Empty}"></Condition>
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Visibility" TargetName="InternalWatermarkLabel"
+                                        Value="Visible" />
+                                <Setter Property="Foreground" TargetName="InternalWatermarkLabel" Value="{DynamicResource F2Brush}"></Setter>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        <!--Extra styles for when hovered (but not inside of) a non-error, non-success, non-disabled box... The foreground (text color) needs to change-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="BorderBrush"  Value="{DynamicResource F3Brush}"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        <!--Extra styles for when focused (inside of) a non-error, non-success box... The border brush and foreground (text color) needs to change-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsFocused" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource B6BorderBrush}"/>
+                                <Setter Property="Foreground"  Value="{DynamicResource F3Brush}"/>
+                                <Setter Property="CaretBrush" Value="{DynamicResource F3Brush}"></Setter>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

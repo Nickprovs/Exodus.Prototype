@@ -1,0 +1,38 @@
+﻿<prism:PrismApplication 
+             x:Class="Exodus.DesktopClient.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:local="clr-namespace:Exodus.DesktopClient"
+             xmlns:types="clr-namespace:Exodus.DesktopClient.Data.Types;assembly=Exodus.DesktopClient.Data"
+             xmlns:treeViewWrapper="clr-namespace:Exodus.DesktopClient.Views.UserControls.TreeView">
+
+    <Application.Resources>
+
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Exodus.Common.Controls;component/Themes/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Source -->
+            <DataTemplate DataType="{x:Type types:DcSource}">
+                <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <!--Todo Set Icon-->
+                    <treeViewWrapper:DcTreeViewItemContent x:Name="TreeItem" Icon="{StaticResource i2_source}" Label="{Binding Name}" Payload="{Binding}"/>
+                </Viewbox>
+            </DataTemplate>
+
+            <!-- Session -->
+            <DataTemplate DataType="{x:Type types:DcSpaceSession}">
+                <Viewbox HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <!--Todo Set Icon-->
+                    <treeViewWrapper:DcTreeViewItemContent x:Name="TreeItem" Icon="{StaticResource i3_session}" Label="{Binding Name}" Payload="{Binding}"/>
+                </Viewbox>
+            </DataTemplate>
+
+        </ResourceDictionary>
+
+        
+    </Application.Resources>
+</prism:PrismApplication>

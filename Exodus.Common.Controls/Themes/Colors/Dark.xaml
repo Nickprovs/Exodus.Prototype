@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!--#region Foreground Colors-->
+    <Color x:Key="F1">#006fb8</Color>
+    <Color x:Key="F2">#4a8fbc</Color>
+    <Color x:Key="F3">#c9cad1</Color>
+    <Color x:Key="F4">#edeef3</Color>
+    <Color x:Key="F5">#b11826</Color>
+    <Color x:Key="F6">#1a8c2d</Color>
+     <!--#endregion-->
+        
+    <!--#region Foreground Brushes-->
+    <SolidColorBrush x:Key="F1Brush" Color="{DynamicResource F1}"/>
+    <SolidColorBrush x:Key="F2Brush" Color="{DynamicResource F2}"/>
+    <SolidColorBrush x:Key="F3Brush" Color="{DynamicResource F3}"/>
+    <SolidColorBrush x:Key="F4Brush" Color="{DynamicResource F4}"/>
+    <SolidColorBrush x:Key="F5Brush" Color="{DynamicResource F5}"/>
+    <SolidColorBrush x:Key="F6Brush" Color="{DynamicResource F6}"/>
+    <!--#endregion-->      
+    
+    <!--#region Background Colors-->
+    <Color x:Key="B1">#050a11</Color>
+    <Color x:Key="B2">#0d1520</Color>
+    <Color x:Key="B3">#282c31</Color>
+    <Color x:Key="B4">#0f1e33</Color>
+    <Color x:Key="B5">#182d4a</Color>
+    <Color x:Key="B6">#303e52</Color>
+    <!--#endregion-->
+    
+    <!--#region Background Brushes-->
+    <SolidColorBrush x:Key="B1Brush" Color="{DynamicResource B1}"/>
+    <SolidColorBrush x:Key="B2Brush" Color="{DynamicResource B2}"/>
+    <SolidColorBrush x:Key="B3Brush" Color="{DynamicResource B3}"/>
+    <SolidColorBrush x:Key="B4Brush" Color="{DynamicResource B4}"/>
+    <SolidColorBrush x:Key="B5Brush" Color="{DynamicResource B5}"/>
+    <SolidColorBrush x:Key="B6Brush" Color="{DynamicResource B6}"/>
+    <!--#endregion-->
+    
+    
+</ResourceDictionary>

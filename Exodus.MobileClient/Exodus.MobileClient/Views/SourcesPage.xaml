@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Exodus.MobileClient.Controls"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Exodus.MobileClient.Views.SourcesPage"
+             Title="{Binding Title}"
+             BackgroundColor="{DynamicResource B2}">
+    <StackLayout>
+        <ListView ItemsSource="{Binding Profile.Sources }" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <controls:ViewBox HorizontalOptions="Start" VerticalOptions="Start">
+                            <controls:McListViewItemContent Name="{Binding Name}">
+                                <controls:McListViewItemContent.Icon>
+                                    <controls:Icon                
+                                        ResourceId= "{DynamicResource i2_source}"
+                                        Stroke="{DynamicResource F1}"/>
+                                </controls:McListViewItemContent.Icon>
+                            </controls:McListViewItemContent>
+                        </controls:ViewBox>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+      </StackLayout>
+</ContentPage>

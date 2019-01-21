@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f17bd0730e9b4253a5c7755c88b198d7" Name="Diagram1">
+        <EntityTypeShape EntityType="ExodusPrototype1Model.DigitalWall" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExodusPrototype1Model.PhysicalWall" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExodusPrototype1Model.Session" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExodusPrototype1Model.Source" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExodusPrototype1Model.SourceInstance" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExodusPrototype1Model.SpaceSession" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExodusPrototype1Model.Wall" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="ExodusPrototype1Model.FK_DigitalWall_Wall" ManuallyRouted="false" />
+        <AssociationConnector Association="ExodusPrototype1Model.FK_SpaceSession_DigitalWall" ManuallyRouted="false" />
+        <AssociationConnector Association="ExodusPrototype1Model.FK_PhysicalWall_Wall" ManuallyRouted="false" />
+        <AssociationConnector Association="ExodusPrototype1Model.FK_SpaceSession_Session" ManuallyRouted="false" />
+        <AssociationConnector Association="ExodusPrototype1Model.FK_SourceInstance_Source" ManuallyRouted="false" />
+        <AssociationConnector Association="ExodusPrototype1Model.FK_SourceInstance_Wall" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

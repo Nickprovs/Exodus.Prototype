@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Exodus.DesktopClient.Controls.Controls"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:behaviors="clr-namespace:Exodus.DesktopClient.Controls.Behaviors"
+                    xmlns:local="clr-namespace:Exodus.DesktopClient.Controls.Controls">
+    <Style TargetType="{x:Type controls:SourceControl}">
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:SourceControl}">
+                    <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{Binding Path=SourceInstance.Color, RelativeSource={RelativeSource TemplatedParent}}">
+                        
+                        <i:Interaction.Behaviors>
+                            <behaviors:MouseResizeElementBehavior
+                                    x:Name="MouseResizeElementBehavior"
+                                    ResizeEdgeThickness="{Binding ResizeSourceBorderThickness, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                                    X="{Binding SourceInstance.X, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Y="{Binding SourceInstance.Y, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"                                   
+                                    Width="{Binding SourceInstance.Width, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    Height="{Binding SourceInstance.Height, RelativeSource={RelativeSource TemplatedParent},UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            </behaviors:MouseResizeElementBehavior>
+                        </i:Interaction.Behaviors>
+
+                        <Border.ToolTip>
+                            <StackPanel>
+                                <!--Name-->
+                                <TextBlock Text="{Binding SourceInstance.Name, RelativeSource={RelativeSource TemplatedParent}, StringFormat = 'Name: {0}' }"/>
+
+                                <!--Position-->
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="Position: X: {0} , Y: {1}">
+                                            <Binding Path="SourceInstance.X" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="SourceInstance.Y" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+
+                                <!--Size-->
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="Position: Width: {0} , Height: {1}">
+                                            <Binding Path="SourceInstance.Width" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="SourceInstance.Height" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                        </Border.ToolTip>
+
+                        <Border.ContextMenu>
+                            <!--WPF makes context menu bindings extremely difficult as context menu's are outside the standard visual tree. But we can still access our placement target... so that is de way-->
+                            <ContextMenu Name="ContextMenu" DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                <MenuItem Header="Bring To Front" Command="{x:Static local:SourceControl.BringSourceToFrontContextMenuCommand}" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                <MenuItem Header="Send To Back" Command="{x:Static local:SourceControl.SendSourceToBackContextMenuCommand}" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                <MenuItem Header="Remove" Command="{x:Static local:SourceControl.RemoveSourceContextMenuCommand}" CommandTarget="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                            </ContextMenu>
+                        </Border.ContextMenu>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="Exodus.DesktopClient.Views.UserControls.Hub.HubContentSessions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Exodus.DesktopClient.Views.UserControls.Hub"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:interactivity="http://prismlibrary.com/"
+             xmlns:popups="clr-namespace:Exodus.DesktopClient.Views.Popups"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:vm="clr-namespace:Exodus.DesktopClient.ViewModels.UserControls.Hub"
+             xmlns:commonControls="clr-namespace:Exodus.Common.Controls.Controls;assembly=Exodus.Common.Controls"
+             xmlns:commonConverters="clr-namespace:Exodus.Common.Controls.Converters;assembly=Exodus.Common.Controls"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance vm:HubContentSessionsViewModel}"
+             d:DesignHeight="800" d:DesignWidth="250"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <commonConverters:DoubleToScaledDoubleConverter x:Key="DoubleToScaledDouble"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <!--This is where we specify the view associated with the popup request-->
+        <prism:InteractionRequestTrigger SourceObject="{Binding NewSpaceSessionPopupRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="MinWidth" Value="400"/>
+                        <Setter Property="MinHeight" Value="350"/>
+                        <Setter Property="MaxWidth" Value="600"/>
+                        <Setter Property="MaxHeight" Value="500"/>
+                        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+                        <Setter Property="WindowStyle" Value="None"/>
+                        <Setter Property="AllowsTransparency" Value="True"/>
+                        <Setter Property="WindowChrome.WindowChrome">
+                            <Setter.Value>
+                                <WindowChrome x:Name="ResizeChrome"
+                                  CaptionHeight="0"
+                                  ResizeBorderThickness="5" />
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <prism:PopupWindowAction.WindowContent>
+                    <popups:NewSpaceSessionPopup />
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="86*"/>
+            </Grid.RowDefinitions>
+
+        <commonControls:ExodusStandardButton Grid.Row="0" Command="{Binding AddSessionCommand}">
+            <commonControls:ExodusStandardButton.Content>
+                <Viewbox Stretch="Uniform">
+                    <TextBlock Margin="2" Text="Add New Session"/>
+                </Viewbox>
+            </commonControls:ExodusStandardButton.Content>
+        </commonControls:ExodusStandardButton>
+            
+        <commonControls:ExodusStandardButton Grid.Row="1"  Command="{Binding DeleteSessionCommand}">
+            <commonControls:ExodusStandardButton.Content>
+                <Viewbox Stretch="Uniform">
+                    <TextBlock Margin="2" Text="Delete Selected Session"/>
+                </Viewbox>
+            </commonControls:ExodusStandardButton.Content>
+        </commonControls:ExodusStandardButton>
+
+        <ListView x:Name="SessionList" BorderBrush="Transparent" Grid.Row="2" Background="Transparent" SelectedItem="{Binding SelectedSpaceSession}" ItemsSource="{Binding Profile.SpaceSessions}">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Height" Value="{Binding Path=ActualHeight, ElementName=SessionList, Converter={StaticResource DoubleToScaledDouble}, ConverterParameter=0.06}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource F1Brush}"/>
+                        <Setter Property="IsSelected" Value="{Binding IsListItemSelected, Mode=TwoWay}"/>
+                    </Style>
+                </ListView.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <interactivity:InvokeCommandAction Command="{Binding SelectedSessionChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListView>
+        </Grid>
+</UserControl>

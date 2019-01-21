@@ -1,0 +1,78 @@
+﻿<Window x:Class="Exodus.WebServer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exodus.WebServer"
+        xmlns:commonControls="clr-namespace:Exodus.Common.Controls.Controls;assembly=Exodus.Common.Controls"
+        xmlns:commonBehaviors="clr-namespace:Exodus.Common.Controls.Behaviors;assembly=Exodus.Common.Controls"
+        xmlns:i = "http://schemas.microsoft.com/expression/2010/interactivity" 
+        mc:Ignorable="d"
+        Title="WPF SignalR Server" 
+        Height="400" 
+        Width="700"
+        Background="{DynamicResource B2Brush}"
+        AllowsTransparency="True"  
+        WindowStyle="None">
+    <WindowChrome.WindowChrome>
+        <WindowChrome x:Name="ResizeChrome"
+                      CaptionHeight="0"
+                      ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    <commonControls:ExodusWindow WindowTitle="Exodus SignalR Server" WindowIcon="{StaticResource i0_director_main}">
+        <Grid Background="{DynamicResource B2Brush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <commonControls:ExodusStandardButton 
+            x:Name="ButtonStart" 
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="2"
+            Content="Start" 
+            Click="ButtonStart_Click"/>
+
+            <commonControls:ExodusStandardButton 
+            x:Name="ButtonStop" 
+            Grid.Row="0"
+            Grid.Column="2"
+            Content="Stop" 
+            Margin="2" 
+            Click="ButtonStop_Click" 
+            IsEnabled="False"/>
+
+            <commonControls:ExodusScrollViewer
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3">
+                <i:Interaction.Behaviors>
+                    <commonBehaviors:AutoScrollBehavior />
+                </i:Interaction.Behaviors>
+                <RichTextBox 
+                    x:Name="RichTextBoxConsole" 
+                    Focusable="False" 
+                    IsHitTestVisible="False"
+                    SelectionOpacity="0"
+                    BorderBrush="Transparent"
+                    Foreground="{DynamicResource F1Brush}"
+                    Background="{DynamicResource B2Brush}">
+                    <FlowDocument>
+                        <Paragraph>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </commonControls:ExodusScrollViewer>
+
+
+        </Grid>
+    </commonControls:ExodusWindow>
+
+</Window>

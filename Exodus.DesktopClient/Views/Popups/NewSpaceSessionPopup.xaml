@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Exodus.DesktopClient.Views.Popups.NewSpaceSessionPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Exodus.DesktopClient.Views.Popups"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:vm="clr-namespace:Exodus.DesktopClient.ViewModels.Popups"
+             xmlns:commonControls="clr-namespace:Exodus.Common.Controls.Controls;assembly=Exodus.Common.Controls"
+             d:DataContext="{d:DesignInstance vm:NewSpaceSessionPopupViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" 
+             d:DesignWidth="400">
+    <commonControls:ExodusWindow WindowTitle="Exodus Prototype" WindowIcon="{StaticResource i0_director_main}">
+        <Grid  Background="{DynamicResource B2Brush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="65*"/>
+                <RowDefinition Height="18*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" Foreground="{DynamicResource F1Brush}" Margin="10">Add New Space Session</TextBlock>
+
+            <StackPanel Orientation="Vertical" Margin="5" Grid.Row="1" Grid.ColumnSpan="2">
+                <TextBlock  Margin="5 0" Foreground="{DynamicResource F1Brush}" FontSize="14" Text="Space Session Name"/>
+                <commonControls:ExodusTextBox Margin="5 5 5 0" Text="{Binding SpaceSessionName}"/>
+                <TextBlock Margin="5 5 5 0" Foreground="{DynamicResource F1Brush}"  Text="Width"/>
+                <commonControls:ExodusTextBox Margin="5 5 5 0" Text="{Binding WidthString}"/>
+                <TextBlock Margin="5 5 5 0" Foreground="{DynamicResource F1Brush}" Text="Height"/>
+                <commonControls:ExodusTextBox Margin="5 5 5 0" Text="{Binding HeightString}" />
+            </StackPanel>
+
+            <commonControls:ExodusStandardButton Height="28" Grid.Row="2" Grid.Column="0" Margin="10 0 20 10" Content="Add Space Session" Command="{Binding AddSpaceSessionCommand}"/>
+            <commonControls:ExodusStandardButton Height="28" Grid.Row="2" Grid.Column="1" Margin="20 0 10 10" Content="Cancel" Command="{Binding CancelCommand}"/>
+
+        </Grid>
+    </commonControls:ExodusWindow>
+</UserControl>

@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Exodus.DesktopClient.Views.Popups.NewSourcePopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Exodus.DesktopClient.Views.Popups"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:vm="clr-namespace:Exodus.DesktopClient.ViewModels.Popups"
+             xmlns:commonControls="clr-namespace:Exodus.Common.Controls.Controls;assembly=Exodus.Common.Controls"
+             d:DataContext="{d:DesignInstance vm:NewSourcePopupViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" 
+             d:DesignWidth="400">
+    <commonControls:ExodusWindow WindowTitle="Exodus Prototype" WindowIcon="{StaticResource i0_director_main}">
+        <Grid Background="{DynamicResource B2Brush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="70*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" Foreground="{DynamicResource F1Brush}" Margin="10">Add New Source</TextBlock>
+
+            <StackPanel Orientation="Vertical" Margin="5" Grid.Row="1" Grid.ColumnSpan="2">
+                <TextBlock Margin="5 0" Foreground="{DynamicResource F1Brush}" FontSize="14" Text="Source Name"/>
+                <commonControls:ExodusTextBox Margin="5 5 5 0" Text="{Binding SourceName}"/>
+                <TextBlock Margin="5 5 5 0" Foreground="{DynamicResource F1Brush}" Text="Color"/>
+                <xctk:ColorPicker 
+                Margin="5 0"
+                Height="28" 
+                Foreground="{DynamicResource F1Brush}" 
+                BorderBrush="{DynamicResource F1Brush}" 
+                Background="{DynamicResource B3Brush}"
+                SelectedColor="{Binding Color}"/>
+                <TextBlock Margin="5 5 5 0" Foreground="{DynamicResource F1Brush}" Text="Default Width"/>
+                <commonControls:ExodusTextBox Margin="5 5 5 0" Text="{Binding DefaultWidthString}"/>
+                <TextBlock Margin="5 5 5 0" Foreground="{DynamicResource F1Brush}" Text="Default Height"/>
+                <commonControls:ExodusTextBox Margin="5 5 5 0" Text="{Binding DefaultHeightString}" />
+            </StackPanel>
+
+            <commonControls:ExodusStandardButton Height="28" Grid.Row="2" Grid.Column="0" Margin="10 0 20 10" Content="Add Source" Command="{Binding AddSourceCommand}"/>
+            <commonControls:ExodusStandardButton Height="28" Grid.Row="2" Grid.Column="1" Margin="20 0 10 10" Content="Cancel" Command="{Binding CancelCommand}"/>
+
+        </Grid>
+    </commonControls:ExodusWindow>
+</UserControl>

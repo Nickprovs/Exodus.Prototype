@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ExodusPrototype1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DigitalWall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhysicalWall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DefaultWidth" Type="int" Nullable="false" />
+          <Property Name="DefaultHeight" Type="int" Nullable="false" />
+          <Property Name="HexColor" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SourceInstance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceId" Type="int" Nullable="false" />
+          <Property Name="X" Type="int" Nullable="false" />
+          <Property Name="Y" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="WallId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpaceSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DigitalWallId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DigitalWall_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DigitalWall" Type="Self.DigitalWall" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DigitalWall">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhysicalWall_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="PhysicalWall" Type="Self.PhysicalWall" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhysicalWall">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceInstance_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="SourceInstance" Type="Self.SourceInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SourceInstance">
+              <PropertyRef Name="SourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceInstance_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SourceInstance" Type="Self.SourceInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SourceInstance">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceSession_DigitalWall">
+          <End Role="DigitalWall" Type="Self.DigitalWall" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SpaceSession" Type="Self.SpaceSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DigitalWall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpaceSession">
+              <PropertyRef Name="DigitalWallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceSession_Session">
+          <End Role="Session" Type="Self.Session" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SpaceSession" Type="Self.SpaceSession" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpaceSession">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExodusPrototype1ModelStoreContainer">
+          <EntitySet Name="DigitalWall" EntityType="Self.DigitalWall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhysicalWall" EntityType="Self.PhysicalWall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Source" EntityType="Self.Source" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SourceInstance" EntityType="Self.SourceInstance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpaceSession" EntityType="Self.SpaceSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wall" EntityType="Self.Wall" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DigitalWall_Wall" Association="Self.FK_DigitalWall_Wall">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="DigitalWall" EntitySet="DigitalWall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhysicalWall_Wall" Association="Self.FK_PhysicalWall_Wall">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="PhysicalWall" EntitySet="PhysicalWall" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceInstance_Source" Association="Self.FK_SourceInstance_Source">
+            <End Role="Source" EntitySet="Source" />
+            <End Role="SourceInstance" EntitySet="SourceInstance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceInstance_Wall" Association="Self.FK_SourceInstance_Wall">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="SourceInstance" EntitySet="SourceInstance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceSession_DigitalWall" Association="Self.FK_SpaceSession_DigitalWall">
+            <End Role="DigitalWall" EntitySet="DigitalWall" />
+            <End Role="SpaceSession" EntitySet="SpaceSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceSession_Session" Association="Self.FK_SpaceSession_Session">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="SpaceSession" EntitySet="SpaceSession" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ExodusPrototype1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DigitalWall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Wall" Relationship="Self.FK_DigitalWall_Wall" FromRole="DigitalWall" ToRole="Wall" />
+          <NavigationProperty Name="SpaceSessions" Relationship="Self.FK_SpaceSession_DigitalWall" FromRole="DigitalWall" ToRole="SpaceSession" />
+        </EntityType>
+        <EntityType Name="PhysicalWall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Wall" Relationship="Self.FK_PhysicalWall_Wall" FromRole="PhysicalWall" ToRole="Wall" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SpaceSession" Relationship="Self.FK_SpaceSession_Session" FromRole="Session" ToRole="SpaceSession" />
+        </EntityType>
+        <EntityType Name="Source">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DefaultWidth" Type="Int32" Nullable="false" />
+          <Property Name="DefaultHeight" Type="Int32" Nullable="false" />
+          <Property Name="HexColor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SourceInstances" Relationship="Self.FK_SourceInstance_Source" FromRole="Source" ToRole="SourceInstance" />
+        </EntityType>
+        <EntityType Name="SourceInstance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceId" Type="Int32" Nullable="false" />
+          <Property Name="X" Type="Int32" Nullable="false" />
+          <Property Name="Y" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="WallId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Source" Relationship="Self.FK_SourceInstance_Source" FromRole="SourceInstance" ToRole="Source" />
+          <NavigationProperty Name="Wall" Relationship="Self.FK_SourceInstance_Wall" FromRole="SourceInstance" ToRole="Wall" />
+        </EntityType>
+        <EntityType Name="SpaceSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DigitalWallId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DigitalWall" Relationship="Self.FK_SpaceSession_DigitalWall" FromRole="SpaceSession" ToRole="DigitalWall" />
+          <NavigationProperty Name="Session" Relationship="Self.FK_SpaceSession_Session" FromRole="SpaceSession" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Wall">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DigitalWall" Relationship="Self.FK_DigitalWall_Wall" FromRole="Wall" ToRole="DigitalWall" />
+          <NavigationProperty Name="PhysicalWall" Relationship="Self.FK_PhysicalWall_Wall" FromRole="Wall" ToRole="PhysicalWall" />
+          <NavigationProperty Name="SourceInstances" Relationship="Self.FK_SourceInstance_Wall" FromRole="Wall" ToRole="SourceInstance" />
+        </EntityType>
+        <Association Name="FK_DigitalWall_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="DigitalWall" Type="Self.DigitalWall" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DigitalWall">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceSession_DigitalWall">
+          <End Role="DigitalWall" Type="Self.DigitalWall" Multiplicity="1" />
+          <End Role="SpaceSession" Type="Self.SpaceSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DigitalWall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpaceSession">
+              <PropertyRef Name="DigitalWallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhysicalWall_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="PhysicalWall" Type="Self.PhysicalWall" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PhysicalWall">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceSession_Session">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="SpaceSession" Type="Self.SpaceSession" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SpaceSession">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceInstance_Source">
+          <End Role="Source" Type="Self.Source" Multiplicity="1" />
+          <End Role="SourceInstance" Type="Self.SourceInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Source">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SourceInstance">
+              <PropertyRef Name="SourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SourceInstance_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="SourceInstance" Type="Self.SourceInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SourceInstance">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ExodusPrototype1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DigitalWalls" EntityType="Self.DigitalWall" />
+          <EntitySet Name="PhysicalWalls" EntityType="Self.PhysicalWall" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="Sources" EntityType="Self.Source" />
+          <EntitySet Name="SourceInstances" EntityType="Self.SourceInstance" />
+          <EntitySet Name="SpaceSessions" EntityType="Self.SpaceSession" />
+          <EntitySet Name="Walls" EntityType="Self.Wall" />
+          <AssociationSet Name="FK_DigitalWall_Wall" Association="Self.FK_DigitalWall_Wall">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="DigitalWall" EntitySet="DigitalWalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceSession_DigitalWall" Association="Self.FK_SpaceSession_DigitalWall">
+            <End Role="DigitalWall" EntitySet="DigitalWalls" />
+            <End Role="SpaceSession" EntitySet="SpaceSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhysicalWall_Wall" Association="Self.FK_PhysicalWall_Wall">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="PhysicalWall" EntitySet="PhysicalWalls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceSession_Session" Association="Self.FK_SpaceSession_Session">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="SpaceSession" EntitySet="SpaceSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceInstance_Source" Association="Self.FK_SourceInstance_Source">
+            <End Role="Source" EntitySet="Sources" />
+            <End Role="SourceInstance" EntitySet="SourceInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SourceInstance_Wall" Association="Self.FK_SourceInstance_Wall">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="SourceInstance" EntitySet="SourceInstances" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ExodusPrototype1ModelStoreContainer" CdmEntityContainer="ExodusPrototype1Entities">
+          <EntitySetMapping Name="DigitalWalls">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.DigitalWall">
+              <MappingFragment StoreEntitySet="DigitalWall">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhysicalWalls">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.PhysicalWall">
+              <MappingFragment StoreEntitySet="PhysicalWall">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sources">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.Source">
+              <MappingFragment StoreEntitySet="Source">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DefaultWidth" ColumnName="DefaultWidth" />
+                <ScalarProperty Name="DefaultHeight" ColumnName="DefaultHeight" />
+                <ScalarProperty Name="HexColor" ColumnName="HexColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourceInstances">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.SourceInstance">
+              <MappingFragment StoreEntitySet="SourceInstance">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="X" ColumnName="X" />
+                <ScalarProperty Name="Y" ColumnName="Y" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="WallId" ColumnName="WallId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpaceSessions">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.SpaceSession">
+              <MappingFragment StoreEntitySet="SpaceSession">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DigitalWallId" ColumnName="DigitalWallId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Walls">
+            <EntityTypeMapping TypeName="ExodusPrototype1Model.Wall">
+              <MappingFragment StoreEntitySet="Wall">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

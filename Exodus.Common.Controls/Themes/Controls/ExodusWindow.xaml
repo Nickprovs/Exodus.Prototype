@@ -1,0 +1,150 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Exodus.Common.Controls.Controls">
+    
+    <Style x:Key="ButtonTransparent" TargetType="{x:Type Button}" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="Transparent" >
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:ExodusWindow">
+        <Setter Property="SnapsToDevicePixels"  Value="true" />
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="WindowState"  Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=WindowState, Mode=TwoWay}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ExodusWindow">
+                    <Border x:Name="TemplateBorder"
+                            Background="{DynamicResource B3Brush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{DynamicResource B5Brush}">
+                        <Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Button x:Name="PART_Header" 
+                                        Height="{Binding WindowHeaderSize, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Grid.Row="0"
+                                        Style="{StaticResource ButtonTransparent}">
+                                    <Border x:Name="PART_Title"
+                                            Background="{DynamicResource B2Brush}"
+                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="0 0 0 0"
+                                            CornerRadius="1 1 0 0" 
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Width="{Binding ActualWidth, ElementName=PART_Header}" >
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="10" />
+                                                <ColumnDefinition Width="20" />
+                                                <ColumnDefinition Width="10" />
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="35" />
+                                                <ColumnDefinition Width="35" />
+                                                <ColumnDefinition Width="35" />
+                                                <ColumnDefinition Width="5" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <ContentControl Grid.Column="1"
+                                                    Content="{Binding WindowIcon, RelativeSource={RelativeSource TemplatedParent}}" Margin="0" 
+                                                    Foreground="{DynamicResource F1Brush}" />
+
+                                            <Label Grid.Column="3" 
+                                                    Content="{Binding WindowTitle, RelativeSource={RelativeSource TemplatedParent}}" 
+                                                    Margin="0" 
+                                                    Padding="0" 
+                                                    FontWeight="SemiBold"
+                                                    FontSize="12" 
+                                                    Foreground="{DynamicResource F1Brush}"
+                                                    VerticalContentAlignment="Center" 
+                                                    HorizontalContentAlignment="Left" />
+
+                                            <Button x:Name="PART_Minimize" 
+                                                    Grid.Column="4"
+                                                    Margin="1" Padding="0" 
+                                                    Style="{StaticResource ButtonTransparent}">
+                                                <ContentControl 
+                                                        x:Name="MinimizeIcon" 
+                                                        Content="{DynamicResource i6_window_minimize}" 
+                                                        Margin="7" 
+                                                        Foreground="{DynamicResource F1Brush}" 
+                                                        VerticalAlignment="Bottom" />
+                                            </Button>
+
+                                            <Button x:Name="PART_Maximize" 
+                                                    Grid.Column="5"
+                                                    Margin="1" Padding="0" 
+                                                    Style="{StaticResource ButtonTransparent}">
+                                                <ContentControl 
+                                                        x:Name="MaximizeIcon" 
+                                                        Content="{DynamicResource i7_window_maximize}" 
+                                                        Margin="7" 
+                                                        Foreground="{DynamicResource F1Brush}" />
+                                            </Button>
+
+                                            <Button x:Name="PART_Close" 
+                                                    Grid.Column="6"
+                                                    Margin="1" Padding="0" 
+                                                    Style="{StaticResource ButtonTransparent}">
+                                                <ContentControl Content="{DynamicResource i7_window_close}" 
+                                                        x:Name="CloseIcon" 
+                                                        Margin="7" 
+                                                        Foreground="{DynamicResource F1Brush}" />
+                                            </Button>
+
+                                            <Border x:Name="ClickSection"
+                                                    Background="Transparent"
+                                                    Grid.Column="0"
+                                                    Grid.ColumnSpan="4" />
+                                        </Grid>
+                                    </Border>
+                                </Button>
+
+                                <AdornerDecorator Grid.Row="1">
+                                    <ContentPresenter x:Name="Contents" Content="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" Margin="{Binding Margin, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </AdornerDecorator>
+
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger SourceName="PART_Minimize" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MinimizeIcon" Property="Foreground" Value="{DynamicResource F2Brush}"/>
+                        </Trigger>
+
+                        <Trigger SourceName="PART_Maximize" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MaximizeIcon" Property="Foreground" Value="{DynamicResource F2Brush}"/>
+                        </Trigger>
+
+                        <Trigger SourceName="PART_Close" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CloseIcon" Property="Foreground" Value="{DynamicResource F2Brush}"/>
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding Path=IsMaximized, RelativeSource={RelativeSource Self}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" Value="True">
+                            <Setter TargetName="MaximizeIcon" Property="Content" Value="{DynamicResource i5_window_restore}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsMaximized, RelativeSource={RelativeSource Self}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" Value="False">
+                            <Setter TargetName="MaximizeIcon" Property="Content" Value="{DynamicResource i4_window_maximize}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource Self}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" Value="Minimized">
+                            <Setter TargetName="MaximizeIcon" Property="Content" Value="{DynamicResource i30_checkbox_blank_line}" />
+                        </DataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

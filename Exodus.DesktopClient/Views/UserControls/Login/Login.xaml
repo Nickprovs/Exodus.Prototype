@@ -1,0 +1,50 @@
+﻿<UserControl 
+        x:Class="Exodus.DesktopClient.Views.UserControls.Login.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:commonControls="clr-namespace:Exodus.Common.Controls.Controls;assembly=Exodus.Common.Controls"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:local="clr-namespace:Exodus.DesktopClient.Views.UserControls.Login"
+        xmlns:vm="clr-namespace:Exodus.DesktopClient.ViewModels.UserControls.Login"
+        mc:Ignorable="d"  
+        d:DataContext="{d:DesignInstance vm:LoginViewModel}"
+        d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid Background="{DynamicResource B2Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Foreground="{DynamicResource F1Brush}" Grid.Row="0" Text="Ip Address" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <commonControls:ExodusTextBox Grid.Row="1" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding IpAddress}"/>
+            <!--<TextBlock Foreground="{DynamicResource F1Brush}" Grid.Row="2" Text="Port" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <commonControls:ExodusTextBox Grid.Row="2" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Port}" />-->
+            <commonControls:ExodusStandardButton Grid.Row="3" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Connect" Command="{Binding LoginCommand}"/>
+        </Grid>
+        <ContentControl Grid.Row="2" HorizontalAlignment="Right" Content="{DynamicResource i0_director_main}" Margin="15" Background="Green" Foreground="{DynamicResource F1Brush}">
+            <!--<ContentControl.Style>
+                <Style TargetType="{x:Type ContentControl}">
+                    <Style.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter Property="Image" Value="{DynamicResource i3_settings_line}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Image" Value="{DynamicResource i3_settings_solid}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>-->
+        </ContentControl>
+    </Grid>
+</UserControl>

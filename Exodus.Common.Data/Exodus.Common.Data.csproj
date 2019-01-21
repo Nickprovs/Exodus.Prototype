@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if /I &quot;$(ConfigurationName)&quot; EQU &quot;Release&quot; (&#xD;&#xA;   echo ############################ POSTBUILD ##########################################&#xD;&#xA;     nuget pack -Verbosity detailed -Properties configuration=Release;Platform=AnyCPU $(ProjectPath)&#xD;&#xA;     nuget push *.nupkg -src http://localhost:80/NuGetServer/nuget 12345&#xD;&#xA;    if %errorlevel% EQU 0 del *.nupkg&#xD;&#xA;   echo ############################ POSTBUILD DONE #####################################&#xD;&#xA;)" />
+  </Target>
+
+</Project>

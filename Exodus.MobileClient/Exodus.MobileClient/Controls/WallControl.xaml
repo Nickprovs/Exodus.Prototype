@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Exodus.MobileClient.Controls"
+             x:Class="Exodus.MobileClient.Controls.WallControl"
+             x:Name="wallControl">
+    <controls:ViewBox BackgroundColor="{DynamicResource B2}">
+        <!--TODO: Set ItemsLayout in ItemsControl And Set the default back to stacklayout-->
+        <AbsoluteLayout BackgroundColor="{DynamicResource B3}" WidthRequest="{Binding Wall.Width, Source={x:Reference wallControl}}" HeightRequest="{Binding Wall.Height, Source={x:Reference wallControl}}">
+            <controls:ItemsControl x:Name="_itemsControl" ItemsSource="{Binding Wall.SourceInstances, Source={x:Reference wallControl}}">
+                <controls:ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:SourceControl SourceInstance="{Binding}" AbsoluteLayout.LayoutBounds="{Binding Position}"/>
+                    </DataTemplate>
+                </controls:ItemsControl.ItemTemplate>
+            </controls:ItemsControl>
+        </AbsoluteLayout>
+    </controls:ViewBox>
+</ContentView>

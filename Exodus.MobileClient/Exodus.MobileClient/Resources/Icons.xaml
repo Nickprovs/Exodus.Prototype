@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <x:String x:Key="i0_director_main">Exodus.MobileClient.Resources.Icons.i0_director_main.svg</x:String>
+    <x:String x:Key="i1_director_sad">Exodus.MobileClient.Resources.Icons.i1_director_sad.svg</x:String>
+    <x:String x:Key="i2_source">Exodus.MobileClient.Resources.Icons.i2_source.svg</x:String>
+    <x:String x:Key="i3_session">Exodus.MobileClient.Resources.Icons.i3_session.svg</x:String>
+
+</ResourceDictionary>
