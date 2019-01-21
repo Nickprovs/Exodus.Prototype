@@ -12,14 +12,19 @@ namespace Exodus.WebServer
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class ExodusPrototype1Entities : DbContext
     {
         public ExodusPrototype1Entities()
             : base("name=ExodusPrototype1Entities")
         {
         }
-    
+
+        static ExodusPrototype1Entities()
+        {
+            Database.SetInitializer<ExodusPrototype1Entities>(new CreateDatabaseIfNotExists<ExodusPrototype1Entities>());
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
