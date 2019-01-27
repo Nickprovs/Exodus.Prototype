@@ -508,7 +508,7 @@ namespace Exodus.DesktopClient.Controls.Controls
             double cursorWidthSizeInPixels = SystemParameters.CursorWidth;
             double approxCursorSize = (cursorHeightSizeInPixels + cursorWidthSizeInPixels) / 2;
             if (this.Scale > 0.05)
-                this.ResizeSourceBorderThickness = approxCursorSize / Math.Sqrt(this.Scale);
+                this.ResizeSourceBorderThickness = 2*approxCursorSize / Math.Sqrt(this.Scale);
         }
     }
 }
