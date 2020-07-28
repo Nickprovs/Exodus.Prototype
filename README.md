@@ -44,6 +44,8 @@
 This system demonstrates a technique in which a plane of objects can be synced across various devices.
 Several Client-Types including desktop, mobile, and VR (Unity) can establish a connection over SignalR to a web-server.
 
+The Unity client is in a [seperate project](https://github.com/Nickprovs/Exodus.Prototype.UnityClient).
+
 [![Product Name Screen Shot][product-screenshot]](/_meta/sample.jpg)
 
 ### Built With
