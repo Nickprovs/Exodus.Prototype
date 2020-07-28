@@ -14,7 +14,7 @@ namespace Exodus.Common.Controls.Controls
         #region Constructors and Destructors
 
         /// <summary>
-        /// Initializes static members of the <see cref="ActivuScrollViewer"/> class.
+        /// Initializes static members of the <see cref="ExodusScrollViewer"/> class.
         /// </summary>
         static ExodusScrollViewer()
         {
