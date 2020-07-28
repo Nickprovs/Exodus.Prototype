@@ -79,7 +79,8 @@ namespace Exodus.WebServer
             }
             catch (TargetInvocationException)
             {
-                WriteToConsole("A server is already running at " + ServerURI);
+                WriteToConsole("Insufficient Privileges or a server is already running at " + ServerURI);
+
                 this.Dispatcher.Invoke(() => ButtonStart.IsEnabled = true);
                 return;
             }
