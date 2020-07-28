@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2050
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.Common.Controls", "Exodus.Common.Controls\Exodus.Common.Controls.csproj", "{D4DAA362-C7C7-4202-A4AB-563081AC0498}"
 EndProject
@@ -17,15 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.DesktopClient.Data",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.DesktopClient.Engine", "Exodus.DesktopClient.Engine\Exodus.DesktopClient.Engine.csproj", "{8B1D4D5B-A836-4B14-A0F7-DC07ECDC1AFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.DisplayServer", "Exodus.DisplayServer\Exodus.DisplayServer.csproj", "{38DABD5A-7160-455B-8E27-9E11989D2093}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.WebServer", "Exodus.WebServer\Exodus.WebServer.csproj", "{5E8E951F-0777-4F64-B30E-FEAF5AEC73D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.MobileClient.Android", "Exodus.MobileClient\Exodus.MobileClient.Android\Exodus.MobileClient.Android.csproj", "{4B985ADD-0F06-4159-B3BE-00C6BC3A5FCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.MobileClient.iOS", "Exodus.MobileClient\Exodus.MobileClient.iOS\Exodus.MobileClient.iOS.csproj", "{7697B8DD-26AF-450F-A53E-9D4A11208D51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exodus.MobileClient", "Exodus.MobileClient\Exodus.MobileClient\Exodus.MobileClient.csproj", "{743C6331-FBF5-432D-8171-B6230159A023}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exodus.MobileClient", "Exodus.MobileClient\Exodus.MobileClient\Exodus.MobileClient.csproj", "{743C6331-FBF5-432D-8171-B6230159A023}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -211,20 +209,6 @@ Global
 		{8B1D4D5B-A836-4B14-A0F7-DC07ECDC1AFB}.Release|iPhone.Build.0 = Release|Any CPU
 		{8B1D4D5B-A836-4B14-A0F7-DC07ECDC1AFB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8B1D4D5B-A836-4B14-A0F7-DC07ECDC1AFB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{38DABD5A-7160-455B-8E27-9E11989D2093}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{5E8E951F-0777-4F64-B30E-FEAF5AEC73D4}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
 		{5E8E951F-0777-4F64-B30E-FEAF5AEC73D4}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
 		{5E8E951F-0777-4F64-B30E-FEAF5AEC73D4}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU

@@ -6,6 +6,8 @@
                     xmlns:local="clr-namespace:Exodus.DesktopClient.Controls.Controls">
     <Style TargetType="{x:Type controls:SourceControl}">
         <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="MinHeight" Value="100"/>
         <Setter Property="BorderThickness" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
