@@ -20,7 +20,7 @@
   <h3 align="center">Exodus Prototype</h3>
 
   <p align="center">
-    This is a prototype for a real-time, cross-platform system. 
+    This is a prototype for a real-time, cross-platform system.  Watch a demo [License](https://youtu.be/-kmEY9uos14). 
     <br />
     <br />
   </p>
