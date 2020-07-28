@@ -13,7 +13,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/nickprovs/Ballpit">
+  <a href="https://github.com/Nickprovs/Exodus.Prototype">
     <img src="_meta/logo.png" alt="Logo" width="256" height="256">
   </a>
 
